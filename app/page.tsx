@@ -13,7 +13,7 @@ export default async function Home(){
       <div className="container ak-hero-grid">
         <div className="ak-hero-copy">
           <div className="ak-label ak-label-on-dark"><span className="ak-indicator"/> ANH KHOI · AI MEDIA <span className="ak-label-tail">/ 2026</span></div>
-          <h1>Khám phá<br/>thế giới <span>theo cách mới.</span></h1>
+          <h1>{settings.heroTitle || <>Khám phá<br/>thế giới <span>theo cách mới.</span></>}</h1>
           <p className="ak-hero-desc">{settings.heroDescription || 'Tin đang được quan tâm, những video AI ấn tượng và góc nhìn mới về công nghệ — tất cả trong không gian sáng tạo của Anh Khôi.'}</p>
           <div className="ak-hero-actions">
             <Link href="/videos" className="ak-button ak-button-primary"><CirclePlay size={19}/> Xem video AI <ArrowUpRight size={17}/></Link>
