@@ -2,7 +2,7 @@ import { articles as demoArticles, videoData as demoVideos, facebook as defaultF
 import { normalizeFacebookReelUrl } from '@/lib/facebook';
 
 export type GalleryItem = { title: string; image: string; description?: string };
-export type SiteSettings = { facebookUrl: string; heroTitle?: string; heroDescription?: string; heroCover?: string; email?: string };
+export type SiteSettings = { facebookUrl: string; heroTitle?: string; heroDescription?: string; heroCover?: string; avatar?: string; email?: string };
 type Raw = Record<string, unknown>;
 type RawBlock = { _type?: string; children?: Array<{text?: string}> };
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -50,7 +50,7 @@ export async function getArticles(): Promise<Article[]> {
   if (!result) return demoArticles;
   return result.filter(a=>text(a.title)&&text(a.slug)).map(a=>({
     slug:text(a.slug),title:text(a.title),
-    category: text(a.category)==='TIN HOT'?'TIN HOT':'CÔNG NGHỆ',
+    category: (text(a.category)==='TIN HOT'?'TIN HOT':'CÔNG NGHỆ') as Article['category'],
     date: date(a.publishedAt),readTime:text(a.readTime,'4 phút'),
     image:text(a.image,'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1300&q=85'),
     excerpt:text(a.excerpt), featured:a.featured===true,
@@ -66,8 +66,8 @@ export async function getGallery(): Promise<GalleryItem[]> {
 }
 export async function getSiteSettings(): Promise<SiteSettings> {
   const result = await query<Raw>(String.raw`*[_type=="siteSettings"] | order(_updatedAt desc)[0] {
-    facebookUrl, heroTitle, heroDescription, email, "heroCover":heroCover.asset->url
+    facebookUrl, heroTitle, heroDescription, email, "heroCover":heroCover.asset->url, "avatar":avatar.asset->url
   }`);
-  return {facebookUrl: text(result?.facebookUrl,defaultFacebook),heroTitle:text(result?.heroTitle),heroDescription:text(result?.heroDescription),heroCover:text(result?.heroCover),email:text(result?.email)};
+  return {facebookUrl: text(result?.facebookUrl,defaultFacebook),heroTitle:text(result?.heroTitle),heroDescription:text(result?.heroDescription),heroCover:text(result?.heroCover),avatar:text(result?.avatar),email:text(result?.email)};
 }
 export function isCmsConfigured() { return configured; }
