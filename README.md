@@ -116,3 +116,20 @@ Sanity Studio được deploy **riêng**, không deploy thư mục \`studio/\` n
 - Sanity Docs: https://www.sanity.io/docs/studio/configuration
 - Sanity + Next.js: https://www.sanity.io/docs/nextjs/introduction
 - Tailwind Next.js Starter Blog (tham khảo): https://github.com/timlrx/tailwind-nextjs-starter-blog
+
+
+## Cloudflare Pages (anhkhoi.pages.dev)
+
+Website được cấu hình \`output: 'export'\` trong Next.js để tạo thư mục \`out/\` cho Cloudflare Pages. Đây là **static build**, không có Next.js server/SSR, phù hợp URL miễn phí \`anhkhoi.pages.dev\`.
+
+- GitHub repository: \`kuquan33333/anhkhoi\` — nhánh \`main\`.
+- Pages build command: \`npm run build\`
+- Output directory: \`out\`
+- Runtime Node: \`22\` (\`NODE_VERSION=22\` trong cài đặt Cloudflare Pages).
+- \`NEXT_PUBLIC_SITE_URL=https://anhkhoi.pages.dev\`
+- \`SITE_INDEXING_ENABLED=false\` trong giai đoạn demo. Bật khi đã có nội dung thật.
+
+**Sanity khi chạy static:** \`getArticles/getVideos/getGallery/getSiteSettings\` được gọi tại **thời điểm build**, không truy vấn lại mỗi lần khách truy cập. Nếu bạn đăng Reel/tin mới trên Sanity, **cần trigger một build mới trên Cloudflare Pages** (thủ công hoặc cấu hình Sanity webhook gọi Cloudflare Deploy Hook bảo mật). Sau khi tạo Sanity project, cấu hình các biến \`NEXT_PUBLIC_SANITY_PROJECT_ID\` và \`NEXT_PUBLIC_SANITY_DATASET\` trong Pages build settings. Với dataset private, giữ token chỉ ở build settings và bảo vệ quyền.
+
+**Không đưa token hoặc địa chỉ Deploy Hook công khai vào GitHub.** URL Reels phải công khai và video có quyền nhúng.
+

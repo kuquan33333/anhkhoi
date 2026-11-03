@@ -21,7 +21,7 @@ async function query<T>(groq: string): Promise<T | null> {
     const token = process.env.SANITY_API_READ_TOKEN;
     const response = await fetch(endpoint, {
       headers: token ? {Authorization: 'Bearer ' + token} : {},
-      next: { revalidate: 120 }
+      cache: 'force-cache'
     });
     if (!response.ok) { console.error('Sanity HTTP ' + response.status); return null; }
     const data = await response.json() as {result?: T};
