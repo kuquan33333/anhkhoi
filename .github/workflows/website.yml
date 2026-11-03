@@ -17,3 +17,18 @@ jobs:
         run: npm run lint
       - name: Next.js production build
         run: npm run build
+
+  studio-types:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Sanity Studio dependencies
+        run: npm install --no-audit --no-fund
+      - name: Check Sanity schema TypeScript
+        run: npx tsc --noEmit --project tsconfig.json
