@@ -1,3 +1,4 @@
+export const dynamic = 'force-static';
 import type { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
  const live=process.env.SITE_INDEXING_ENABLED==='true' && !!process.env.NEXT_PUBLIC_SITE_URL;

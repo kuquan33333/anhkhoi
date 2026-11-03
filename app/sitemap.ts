@@ -1,3 +1,4 @@
+export const dynamic = 'force-static';
 import type {MetadataRoute} from 'next';
 import {getArticles,getVideos} from '@/lib/cms';
 export default async function sitemap():Promise<MetadataRoute.Sitemap>{
