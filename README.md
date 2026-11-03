@@ -133,3 +133,12 @@ Website được cấu hình \`output: 'export'\` trong Next.js để tạo thư
 
 **Không đưa token hoặc địa chỉ Deploy Hook công khai vào GitHub.** URL Reels phải công khai và video có quyền nhúng.
 
+
+
+## Giao diện premium v3 (2026-11-03)
+
+- Thiết kế lại trang chủ theo hướng **AI media editorial**: hero hiện đại, card Reels 9:16, bài viết theo bố cục tạp chí, mục giới thiệu người sáng tạo, điều hướng/CTA rõ ràng.
+- Font **Be Vietnam Pro**, bộ ký tự Vietnamese, được đóng gói cùng build nhờ \`@fontsource/be-vietnam-pro\` (không phụ thuộc Google Fonts khi chạy).
+- Giao diện sáng tối tương phản có kiểm soát, tối ưu responsive, trạng thái focus cho điều hướng bằng bàn phím và giảm chuyển động theo \`prefers-reduced-motion\`.
+- File thiết kế mới: \`app/premium.css\`, được import sau \`app/globals.css\` để không gây hỏng các trang nội dung cũ.
+- Banner/ảnh đại diện có thể sửa ở Sanity \`siteSettings\`. Khi chưa có nội dung thật, website vẫn dùng ảnh demo có chú thích trong README. Thay hình/giới thiệu chính thức trước khi quảng bá.
