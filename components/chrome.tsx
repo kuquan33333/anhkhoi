@@ -1,0 +1,11 @@
+'use client';
+import Link from 'next/link';
+import {usePathname} from 'next/navigation';
+import {useState} from 'react';
+import {ArrowUpRight,Menu,X,Zap,Facebook,Instagram,Youtube,Mail} from 'lucide-react';
+import {facebook,menu} from '@/lib/content';
+export function Header(){
+ const pathname=usePathname(); const [open,setOpen]=useState(false);
+ return <header className="site-header"><div className="container nav-inner"><Link className="brand" href="/" onClick={()=>setOpen(false)}><span className="brand-mark"><Zap size={23} fill="currentColor"/></span><span className="brand-text">ANH <b>KHOI</b><small>AI MEDIA <i/></small></span></Link><nav className={'nav-links '+(open?'open':'')} aria-label="Điều hướng chính">{menu.map(item=><Link onClick={()=>setOpen(false)} className={pathname===item.href?'active':''} href={item.href} key={item.href}>{item.label}</Link>)}</nav><div className="nav-actions"><a className="nav-social" href={facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook size={18}/></a><a className="btn btn-primary nav-follow" href={facebook} target="_blank" rel="noopener noreferrer">Theo dõi <ArrowUpRight size={16}/></a><button className="mobile-toggle" aria-label={open?'Đóng menu':'Mở menu'} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button></div></div></header>;
+}
+export function Footer(){return <footer className="footer"><div className="container"><div className="footer-main"><div><Link href="/" className="footer-logo">ANH KHOI<span>.</span></Link><p>Nơi công nghệ gặp gỡ trí tưởng tượng.<br/>AI • Tin hot • Video • Sáng tạo.</p></div><div className="footer-links"><Link href="/videos">Video AI</Link><Link href="/tin-hot">Tin hot</Link><Link href="/cong-nghe">Công nghệ</Link><Link href="/gioi-thieu">Giới thiệu</Link></div><div className="footer-social"><a href={facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer"><Facebook size={18}/></a><a href="mailto:hello@example.com" aria-label="Liên hệ qua email"><Mail size={18}/></a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} ANH KHOI AI MEDIA</span><span>Built for creativity · Nội dung đang ở chế độ demo</span></div></div></footer>}

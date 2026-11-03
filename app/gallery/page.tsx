@@ -1,0 +1,4 @@
+import type {Metadata} from 'next';
+import {videoData} from '@/lib/content';
+export const metadata:Metadata={title:'AI Gallery'};
+export default function Gallery(){return <main><div className="listing-hero"><div className="container"><div className="breadcrumb">TRANG CHỦ / AI GALLERY</div><span className="eyebrow">IMAGINATION, UNFRAMED</span><h1 className="listing-title">Bước vào <span>thế giới hình ảnh AI.</span></h1><p className="listing-subtitle">Một góc trưng bày ý tưởng thị giác. Hình ảnh hiện tại là ảnh stock minh họa, không phải tác phẩm của Anh Khôi.</p></div></div><section className="container listing-section"><div className="gallery-grid">{videoData.map(v=><div key={v.slug} className="gallery-item" style={{backgroundImage:'url("'+v.image+'")'}}><span>{v.title}</span></div>)}</div></section></main>}
